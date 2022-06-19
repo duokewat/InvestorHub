@@ -45,6 +45,32 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.39.0</version>
+				<configuration>
+
+					<images>
+						<image>
+							<alias>stock-service</alias>
+							<name>duokewat/${project.artifactId}:${project.version}</name>
+							<build>
+								<from>openjdk:11</from>
+								<assemblies>
+									<assembly>
+										<mode>dir</mode>
+										<descriptorRef>artifact</descriptorRef>
+									</assembly>
+								</assemblies>
+								<entryPoint>java -jar maven/${project.artifactId}-${project.version}.jar</entryPoint>
+							</build>
+						</image>
+					</images>
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
 
