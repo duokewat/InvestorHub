@@ -1,6 +1,7 @@
 package com.duokewat.towardscloud.investorhub.manager;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -14,15 +15,18 @@ public class CurrencyServiceManager {
 	
 	@Autowired
 	ExchangeRequest exchangeRequest;
+	
+	@Value("${currency.service.url}")
+	private String currencyServiceUrl;
+	
 	public String getExchange(InvestmentRequest investmentRequest) {
 		RestTemplate restTemplate = new RestTemplate();
-		String requestUrl = "http://localhost:8081/currency/exchange";
 		
 		exchangeRequest.setTo(investmentRequest.getInvestingCurrency());
 		exchangeRequest.setFrom("USD");
 		
 		HttpEntity<ExchangeRequest> request = new HttpEntity<>(exchangeRequest);
-		ExchangeResponse response = restTemplate.postForObject(requestUrl, request, ExchangeResponse.class);
+		ExchangeResponse response = restTemplate.postForObject(currencyServiceUrl, request, ExchangeResponse.class);
 		System.out.println(response);
 		return response.getValue();
 	}
