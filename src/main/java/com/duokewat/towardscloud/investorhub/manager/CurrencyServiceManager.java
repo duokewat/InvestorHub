@@ -1,5 +1,7 @@
 package com.duokewat.towardscloud.investorhub.manager;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -19,7 +21,7 @@ public class CurrencyServiceManager {
 	@Value("${currency.service.url}")
 	private String currencyServiceUrl;
 	
-	public String getExchange(InvestmentRequest investmentRequest) {
+	public BigDecimal getExchange(InvestmentRequest investmentRequest) {
 		RestTemplate restTemplate = new RestTemplate();
 		
 		exchangeRequest.setTo(investmentRequest.getInvestingCurrency());

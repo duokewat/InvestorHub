@@ -1,5 +1,7 @@
 package com.duokewat.towardscloud.investorhub.view;
 
+import java.math.BigDecimal;
+
 import org.springframework.stereotype.Component;
 
 import lombok.Getter;
@@ -13,6 +15,6 @@ import lombok.ToString;
 public class InvestmentRequest {
 	private String stockCode;
 	private String marketCode;
-	private int investingAmount;
+	private BigDecimal investingAmount;
 	private String investingCurrency;
 }

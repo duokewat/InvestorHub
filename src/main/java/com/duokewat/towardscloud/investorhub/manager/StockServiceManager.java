@@ -1,5 +1,7 @@
 package com.duokewat.towardscloud.investorhub.manager;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -18,7 +20,7 @@ public class StockServiceManager {
 	
 	@Autowired
 	PriceRequestView priceRequestView;
-	public long getMarketPrice(InvestmentRequest investmentRequest) {
+	public BigDecimal getMarketPrice(InvestmentRequest investmentRequest) {
 		
 		RestTemplate restTemplate = new RestTemplate();
 		

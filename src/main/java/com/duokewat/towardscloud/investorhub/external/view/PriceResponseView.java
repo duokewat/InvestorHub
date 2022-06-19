@@ -1,5 +1,7 @@
 package com.duokewat.towardscloud.investorhub.external.view;
 
+import java.math.BigDecimal;
+
 import org.springframework.stereotype.Component;
 
 import lombok.Getter;
@@ -13,5 +15,5 @@ import lombok.ToString;
 public class PriceResponseView {
 	private String stock;
 	private String market;
-	private long regularMarketPrice;
+	private BigDecimal regularMarketPrice;
 }
