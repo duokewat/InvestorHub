@@ -12,7 +12,10 @@ import com.duokewat.towardscloud.investorhub.external.view.ExchangeRequest;
 import com.duokewat.towardscloud.investorhub.external.view.ExchangeResponse;
 import com.duokewat.towardscloud.investorhub.view.InvestmentRequest;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Component
+@Slf4j
 public class CurrencyServiceManager {
 	
 	@Autowired
@@ -22,6 +25,9 @@ public class CurrencyServiceManager {
 	private String currencyServiceUrl;
 	
 	public BigDecimal getExchange(InvestmentRequest investmentRequest) {
+		log.debug("Inside getExchange()");
+		log.debug("currencyServiceUrl '{}'",currencyServiceUrl);
+		
 		RestTemplate restTemplate = new RestTemplate();
 		
 		exchangeRequest.setTo(investmentRequest.getInvestingCurrency());
@@ -29,7 +35,7 @@ public class CurrencyServiceManager {
 		
 		HttpEntity<ExchangeRequest> request = new HttpEntity<>(exchangeRequest);
 		ExchangeResponse response = restTemplate.postForObject(currencyServiceUrl, request, ExchangeResponse.class);
-		System.out.println(response);
+		log.debug(response.toString());
 		return response.getValue();
 	}
 }

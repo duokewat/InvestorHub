@@ -12,7 +12,10 @@ import com.duokewat.towardscloud.investorhub.external.view.PriceRequestView;
 import com.duokewat.towardscloud.investorhub.external.view.PriceResponseView;
 import com.duokewat.towardscloud.investorhub.view.InvestmentRequest;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Component
+@Slf4j
 public class StockServiceManager {
 	
 	@Value("${stock.service.url}")
@@ -21,6 +24,8 @@ public class StockServiceManager {
 	@Autowired
 	PriceRequestView priceRequestView;
 	public BigDecimal getMarketPrice(InvestmentRequest investmentRequest) {
+		log.debug("Inside getMarketPrice()");
+		log.debug("stockServiceUrl '{}'",stockServiceUrl);
 		
 		RestTemplate restTemplate = new RestTemplate();
 		
@@ -29,7 +34,8 @@ public class StockServiceManager {
 		
 		HttpEntity<PriceRequestView> request = new HttpEntity<>(priceRequestView);
 		PriceResponseView response = restTemplate.postForObject(stockServiceUrl, request, PriceResponseView.class);
-		System.out.println(response);
+		log.debug(response.toString());
+		
 		return response.getRegularMarketPrice();
 	}
 }
