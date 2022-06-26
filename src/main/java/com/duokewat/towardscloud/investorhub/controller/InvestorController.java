@@ -13,7 +13,7 @@ import com.duokewat.towardscloud.investorhub.view.InvestmentResponse;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/investment")
+@RequestMapping("api/v1/investment")
 @Slf4j
 public class InvestorController {
 	
